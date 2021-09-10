@@ -30,7 +30,7 @@ jobs:
 
   release:
     name: Release
-    if: github.ref == main
+    if: github.ref == "main"
     needs:
       - validate
     runs-on: ubuntu-latest
