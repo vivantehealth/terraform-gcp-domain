@@ -11,4 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: composite
-        uses: vivantehealth/terraform-validate-action
+        uses: vivantehealth/terraform-validate-action@main
