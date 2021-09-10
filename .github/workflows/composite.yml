@@ -1,0 +1,14 @@
+name: Test composite action
+
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: composite
+        uses: vivantehealth/terraform-validate-action
