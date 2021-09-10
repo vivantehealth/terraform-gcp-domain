@@ -30,7 +30,7 @@ jobs:
 
   release:
     name: Release
-    if: github.ref == "refs/heads/main"
+    if: github.ref == 'refs/heads/main'
     needs:
       - validate
     runs-on: ubuntu-latest
