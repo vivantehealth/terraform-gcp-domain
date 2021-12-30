@@ -1,55 +1,21 @@
-name: Publish Terraform module
+# When a commit is made to main, perform a GitHub release, bumping the semantic
+# version. Defaults to `default-bump` param, override with
+# `#major`/`#minor`/`#patch` in the commit message
+name: Publish Terraform Module
 
 on:
   push:
     branches:
-      - "*"
+      - "main"
 
 jobs:
-  validate:
-    name: Validate
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-      - name: Set up Terraform cli
-        uses: hashicorp/setup-terraform@v1
-      - name: Terraform fmt
-        run: |
-          set +e
-          terraform fmt -check
-          if [[ $? -ne 0 ]]; then
-            echo "Be sure to run 'terraform fmt' before committing. This can usually be done in your IDE of choice"
-            exit 1
-          fi
-          set -e
-      - name: TF init
-        run: terraform init -input=false -backend=false
-      - name: TF validate
-        run: terraform validate
-
   release:
-    name: Release
-    if: github.ref == 'refs/heads/main'
-    needs:
-      - validate
+    name: GitHub Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@master
-      - name: GitHub Tag Bump
-        uses: anothrNick/github-tag-action@1.36.0
-        id: tag
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
-          WITH_V: false
-          DRY_RUN: true
-      - name: List Release
-        run: echo "This will create the release '${{ steps.tag.outputs.new_tag }}'"
-      - name: Create Release
-        uses: ncipollo/release-action@v1
+      - name: GitHub semver release
+        uses: vivantehealth/github-semver-release-action@v0
         with:
-          body: ${{ github.event.head_commit.message }}
-          tag: ${{ steps.tag.outputs.new_tag }}
-
+          default-bump: minor
