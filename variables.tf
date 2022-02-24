@@ -42,6 +42,7 @@ variable "activate_api_identities" {
   default = []
 }
 variable "default_service_account" {
-  description = "default service account status"
+  description = "Project default service account setting: can be one of `delete`, `deprivilege`, `disable`, or `keep`."
+  default     = "deprivilege"
   type        = string
 }
