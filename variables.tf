@@ -41,3 +41,7 @@ variable "activate_api_identities" {
   }))
   default = []
 }
+variable "default_service_account" {
+  description = "default service account status"
+  type        = string
+}
