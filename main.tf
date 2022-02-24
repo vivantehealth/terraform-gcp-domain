@@ -14,5 +14,7 @@ module "domain_project_factory" {
   activate_apis               = var.activate_apis
   disable_services_on_destroy = false
   disable_dependent_services  = false
+  activate_api_identities     = var.activate_api_identities
+  default_service_account     = var.default_service_account
 }
 

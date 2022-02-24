@@ -32,3 +32,16 @@ variable "activate_apis" {
   description = "List of APIs to activate within the project"
   type        = list(string)
 }
+
+variable "activate_api_identities" {
+  description = "List of API identities to activate within the project"
+  type = list(object({
+    api   = string
+    roles = list(string)
+  }))
+  default = []
+}
+variable "default_service_account" {
+  description = "default service account status"
+  type        = string
+}
