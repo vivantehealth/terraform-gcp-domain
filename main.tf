@@ -1,7 +1,7 @@
 # Provision a project for the domain
 module "domain_project_factory" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 15.0"
+  version = "~> 16.0"
 
   # Max project id is 30 chars, and we are appending a dash and 4 random chars
   # Also trim trailing dash in case truncated string ends with a dash
