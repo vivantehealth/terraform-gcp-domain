@@ -1,4 +1,6 @@
 locals {
+  # Max project id is 30 chars, and we are appending a dash and 4 random chars
+  # Also trim trailing dash in case truncated string ends with a dash
   project_id        = var.project_id != null ? var.project_id : trim(substr("${var.name}-${var.env_id}", 0, 25), "-")
   random_project_id = var.project_id == null ? true : false
 }
@@ -8,8 +10,6 @@ module "domain_project_factory" {
   source  = "terraform-google-modules/project-factory/google"
   version = "~> 15.0"
 
-  # Max project id is 30 chars, and we are appending a dash and 4 random chars
-  # Also trim trailing dash in case truncated string ends with a dash
   project_id                  = local.project_id
   name                        = substr("${var.name} ${var.env_name}", 0, 30)
   billing_account             = var.billing_account
