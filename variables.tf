@@ -47,3 +47,9 @@ variable "default_service_account" {
   default     = "deprivilege"
   type        = string
 }
+
+variable "project_id" {
+  description = "Use this to explicitly set the project ID. If not set, the project ID will be generated from the domain name, env_id, and a random suffix."
+  default     = null
+  type        = string
+}
