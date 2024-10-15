@@ -8,7 +8,7 @@ locals {
 # Provision a project for the domain
 module "domain_project_factory" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 15.0"
+  version = "~> 17.0"
 
   project_id                  = local.project_id
   name                        = substr("${var.name} ${var.env_name}", 0, 30)
